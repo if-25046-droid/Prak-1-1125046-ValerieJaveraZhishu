@@ -32,7 +32,43 @@ class Menu {
         price = newprice;
     }
 
+}
+
+class order {
+    static int nextorderid = 1;
+    int OrderID;
+    String Customername;
+    Menu menu;
+    int Quantity;
+
+    public order(String Customername, int Quantity, Menu menu) {
+        this.OrderID = order.nextorderid++;
+        this.Customername = Customername;
+        this.Quantity = Quantity;
+        this.menu = menu;
+
+    }
+
+    double calculatetotal() {
+        if (menu.name.equalsIgnoreCase("Espresso")) {
+            return menu.discount(0.1) * Quantity;
+        }else if (menu.name.equalsIgnoreCase("Croissant")) {
+            menu.changeprice(28000);
+        }
+        return menu.price * Quantity;
+    }
+
+    void showorder() {
+        System.out.println("Order id :" + OrderID);
+        System.out.println("Nama Customer :" + Customername);
+        System.out.println("Harga Awal :" + menu.name);
+        System.out.println("Quantity :" + Quantity);
+        System.out.println("Total Pembayaran: Rp" + calculatetotal());
+        System.out.println();
+    }
+
     public static void main(String[] args) {
+
         Menu Menu1 = new Menu("Espresso", 20000, "Beverage");
         Menu Menu2 = new Menu("Croissant", 28000, "Food");
         Menu Menu3 = new Menu("Matcha", 22000, "Beverage");
@@ -50,18 +86,20 @@ class Menu {
         System.out.println();
 
         System.out.println(Menu1.name);
-        System.out.println("Original Price: Rp" +Menu1.price);
-        System.out.println("Discount 10%: Rp" +Menu1.discount(0.1));
+        System.out.println("Original Price: Rp" + Menu1.price);
+        System.out.println("Discount 10%: Rp" + Menu1.discount(0.1));
         System.out.println();
 
         System.out.println(Menu2.name);
         Menu2.changeprice(28000);
-        System.out.println("New Price: Rp" +Menu2.price);
+        System.out.println("New Price: Rp" + Menu2.price);
         System.out.println();
 
-        System.out.println("Total Menu:"+ totalmenu);
+        System.out.println("Total Menu:" + Menu.totalmenu);
 
+        System.out.println("=== Tantangan Bonus ===");
+        order order1 = new order("Key", 2, Menu1);
+        order1.showorder();
 
     }
-
 }
