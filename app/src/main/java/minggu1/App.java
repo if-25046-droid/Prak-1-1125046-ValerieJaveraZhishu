@@ -3,12 +3,65 @@
  */
 package minggu1;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
+class Menu {
+    String name;
+    double price;
+    String category;
+    static int totalmenu = 0;
+
+    public Menu(String name, double price, String category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+
+        Menu.totalmenu++;
+    }
+
+    void showmenu() {
+        System.out.println("Nama Menu:" + name);
+        System.out.println("Harga Awal:" + price);
+        System.out.println("category:" + category);
+        System.out.println();
+    }
+
+    double discount(double percentage) {
+        return price - (price * percentage);
+    }
+
+    void changeprice(double newprice) {
+        price = newprice;
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Menu Menu1 = new Menu("Espresso", 20000, "Beverage");
+        Menu Menu2 = new Menu("Croissant", 28000, "Food");
+        Menu Menu3 = new Menu("Matcha", 22000, "Beverage");
+        Menu Menu4 = new Menu("Sandwich", 30000, "Food");
+
+        System.out.println("=== CAFE MENU ===");
+        System.out.println();
+
+        Menu1.showmenu();
+        Menu2.showmenu();
+        Menu3.showmenu();
+        Menu4.showmenu();
+
+        System.out.println("=== AFTER UPDATE ===");
+        System.out.println();
+
+        System.out.println(Menu1.name);
+        System.out.println("Original Price: Rp" +Menu1.price);
+        System.out.println("Discount 10%: Rp" +Menu1.discount(0.1));
+        System.out.println();
+
+        System.out.println(Menu2.name);
+        Menu2.changeprice(28000);
+        System.out.println("New Price: Rp" +Menu2.price);
+        System.out.println();
+
+        System.out.println("Total Menu:"+ totalmenu);
+
+
     }
+
 }
